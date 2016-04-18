@@ -9,7 +9,6 @@ class Appointment < ActiveRecord::Base
 
   # Notify our appointment attendee X minutes before the appointment time
   def reminder
-    Rails.logger.info('Reminder!!')
     @twilio_number = '+17206136526'
     @client = Twilio::REST::Client.new 'AC1138789c1d36063211f311d9d1f3480a', '86bfb412a7d74d879d86a89ecafd5896'
     time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
