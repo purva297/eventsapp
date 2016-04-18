@@ -66,6 +66,12 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def rsvp
+    Rails.logger.info(params)
+    Rails.logger.info('--------------')
+    Rails.logger.info(request.body)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     # See above ---> before_action :set_appointment, only: [:show, :edit, :update, :destroy]
@@ -76,11 +82,5 @@ class AppointmentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
       params.require(:appointment).permit(:name, :phone_number, :time, :time_zone)
-    end
-
-    def rsvp
-      Rails.logger.info(params)
-      Rails.logger.info('--------------')
-      Rails.logger.info(request.body)
     end
 end
