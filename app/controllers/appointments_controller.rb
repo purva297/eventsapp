@@ -67,9 +67,15 @@ class AppointmentsController < ApplicationController
   end
 
   def rsvp
-    Rails.logger.info(params)
-    Rails.logger.info('--------------')
-    Rails.logger.info(request.body)
+    from = params["From"]
+    response = params["Body"]
+    appointment = Appointment.find_by_phone_number(from)
+    unless appointment.nil?
+      appointment.status = response
+      appointment.save
+      format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+    end
+    
   end
 
   private
