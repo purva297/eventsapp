@@ -77,4 +77,10 @@ class AppointmentsController < ApplicationController
     def appointment_params
       params.require(:appointment).permit(:name, :phone_number, :time, :time_zone)
     end
+
+    def rsvp
+      Rails.logger.info(params)
+      Rails.logger.info('--------------')
+      Rails.logger.info(request.body)
+    end
 end
