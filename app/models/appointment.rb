@@ -18,6 +18,10 @@ class Appointment < ActiveRecord::Base
       :to => self.phone_number,
       :body => reminder,
     )
+
+    Rails.logger.info('-------------')
+    Rails.logger.info(message.sid)
+    Rails.logger.info('-------------')
     puts message.to
   end
 end
