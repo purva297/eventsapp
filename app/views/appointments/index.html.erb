@@ -1,12 +1,12 @@
 <%- model_class = Appointment -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Invitation List</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th> Invitee Name </th>
       <th><%= model_class.human_attribute_name(:phone_number) %></th>
       <th><%= model_class.human_attribute_name(:time) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -22,7 +22,7 @@
         <td><%= appointment.phone_number %></td>
         <td><%= appointment.time %></td>
         <td><%=l appointment.created_at %></td>
-        <td><%= appointment.status %></td>
+        <td><%= appointment.status || 'Pending' %></td>
         <td>
           <%= link_to "Edit", 
                       edit_appointment_path(appointment), :class => 'btn btn-default btn-xs' %>
@@ -37,6 +37,6 @@
   </tbody>
 </table>
 
-<%= link_to "New",
+<%= link_to "New Invitation",
             new_appointment_path,
             :class => 'btn btn-primary' %>
