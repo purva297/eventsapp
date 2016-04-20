@@ -68,18 +68,25 @@ class AppointmentsController < ApplicationController
 
   def rsvp
     from = params["From"]
-    response = params["Body"]
-    Rails.logger.info('=========')
-    Rails.logger.info(params)
-    Rails.logger.info('=========')
-    appointment = Appointment.find_by_phone_number(from)
-    unless appointment.nil?
-      appointment.status = response
-      appointment.save
-      format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+    response_body = params["Body"]
+    # Response = <id>,Yes
+    id, response = response_body.split(",")
+    unless id.nil? or response.nil?
+      id = id.strip
+      response = response.strip
+      
+      appointment = Appointment.find_by_id(id)
+      unless appointment.nil?
+        appointment.status = response
+        appointment.save
+        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }      
+      else
+        format.json { head :no_content }
+      end
     else
       format.json { head :no_content }
     end
+
     
   end
 
